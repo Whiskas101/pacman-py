@@ -2,11 +2,14 @@ import pygame
 
 
 class Player:
-    def __init__(self, speed, dim=[25,25], pos = [200,200]):
+    def __init__(self, speed, dim=(25,25), pos = (200,200)):
         # not sure of what attributes to even give this
         self.speed = speed 
         self.dim = dim # height and width 
         self.pos = pos # starting position
+        
+        self.rect = pygame.Rect(self.pos, self.dim) # Pygame rect
+
         print(f"Created Player: {self.dim, self.pos}") 
 
 
@@ -15,24 +18,25 @@ class Player:
         print("called ", direction) 
         match direction.upper():
             case "UP":
-                self.pos[1] -= self.speed * 0.1 # move up
+                self.rect.move_ip(0, -self.speed*0.1) # move up
             case "DOWN":
-                self.pos[1] += self.speed * 0.1
+                self.rect.move_ip(0, +self.speed*0.1) # move up
 
             case "LEFT":
-                self.pos[0] -= self.speed * 0.1
+                self.rect.move_ip(-self.speed*0.1, 0) # move up
 
             case "RIGHT":
-                self.pos[0] += self.speed * 0.1
+                self.rect.move_ip(+self.speed*0.1, 0) # move up
     
 
     # having the draw method here is bad coupling, but composition would be harder to explain
 
     def draw(self, screen):
-        pygame.draw.rect(screen, (10,200,10), (self.pos[0], self.pos[1],
-                         self.dim[0], self.dim[1]))
+        pygame.draw.rect(screen, (10,200,10), self.rect)
 
-
+    
+    def collidelistall(self, *args, **kwargs):
+        return self.rect.collidelistall(*args, **kwargs)
     
 
 

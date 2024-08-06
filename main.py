@@ -3,7 +3,7 @@
 
 import pygame
 from player import Player
-
+from GridObject import GridObject
 pygame.init()
 
 screen = pygame.display.set_mode((1280, 720))
@@ -12,7 +12,9 @@ player_pos = pygame.Vector2(screen.get_width()/2, screen.get_height()/2)
 running = True
 
 player = Player(speed=10)
+obstacle = GridObject(dim=(200,200))
 
+collision = None
 
 while running:
 
@@ -34,6 +36,14 @@ while running:
     
     # rendering works here
     player.draw(screen)    
+    obstacle.draw(screen)
+
+    collision = player.rect.collidelistall([obstacle])
+    if collision:
+        print(collision)
+
+    #simple collision detection
+    
 
     pygame.display.flip()
 
