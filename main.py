@@ -22,9 +22,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     keys = pygame.key.get_pressed() 
+
     if keys[pygame.K_UP]:
         player.move("UP")
-
     if keys[pygame.K_DOWN]:
         player.move("DOWN")
     if keys[pygame.K_LEFT]:

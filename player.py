@@ -2,7 +2,7 @@ import pygame
 
 
 class Player:
-    def __init__(self, speed, dim=(25,25), pos = (200,200)):
+    def __init__(self, speed, dim=(25,25), pos = (600,200)):
         # not sure of what attributes to even give this
         self.speed = speed 
         self.dim = dim # height and width 
@@ -18,16 +18,14 @@ class Player:
         print("called ", direction) 
         match direction.upper():
             case "UP":
-                self.rect.move_ip(0, -self.speed*0.1) # move up
+                self.rect.move_ip(0, -self.speed*0.1)
             case "DOWN":
-                self.rect.move_ip(0, +self.speed*0.1) # move up
-
+                self.rect.move_ip(0, +self.speed*0.1)
             case "LEFT":
-                self.rect.move_ip(-self.speed*0.1, 0) # move up
+                self.rect.move_ip(-self.speed*0.1, 0) 
 
             case "RIGHT":
-                self.rect.move_ip(+self.speed*0.1, 0) # move up
-    
+                self.rect.move_ip(+self.speed*0.1, 0)     
 
     # having the draw method here is bad coupling, but composition would be harder to explain
 
