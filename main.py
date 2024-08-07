@@ -12,9 +12,33 @@ player_pos = pygame.Vector2(screen.get_width()/2, screen.get_height()/2)
 running = True
 
 player = Player(speed=10)
-obstacle = GridObject(dim=(200,200))
 
 collision = None
+objects = []
+
+
+SIZE = 75
+
+board = [
+    [1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0],
+    [1,0,1,1,0,0,1,1],
+    [1,0,1,1,0,1,1,1],
+    [1,0,0,0,0,1,1,1],
+    [1,0,1,1,0,1,1,1],
+
+]
+    
+for i in range(len(board)):
+    for j in range(len(board[0])):
+        val = board[i][j]
+
+        if val == 0:
+            continue
+
+        obj = GridObject(pos=(SIZE*i, SIZE*j), dim=(SIZE, SIZE))
+        objects.append(obj)
+        
 
 while running:
 
@@ -36,15 +60,12 @@ while running:
     
     # rendering works here
     player.draw(screen)    
-    obstacle.draw(screen)
-
-    collision = player.rect.collidelistall([obstacle])
-    if collision:
-        print(collision)
+    
+    for obj in objects:
+        obj.draw(screen)
+            
 
     #simple collision detection
-    
-
     pygame.display.flip()
 
     clock.tick(60)
