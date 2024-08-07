@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 player_pos = pygame.Vector2(screen.get_width()/2, screen.get_height()/2)
 running = True
 
-player = Player(speed=10)
+player = Player(speed=100)
 
 collision = None
 objects = []
@@ -26,7 +26,6 @@ board = [
     [1,0,1,1,0,1,1,1],
     [1,0,0,0,0,1,1,1],
     [1,0,1,1,0,1,1,1],
-
 ]
     
 for i in range(len(board)):
