@@ -11,11 +11,10 @@ clock = pygame.time.Clock()
 player_pos = pygame.Vector2(screen.get_width()/2, screen.get_height()/2)
 running = True
 
-player = Player(speed=100)
+player = Player(dim=(75,75), speed=1)
 
 collision = None
 objects = []
-
 
 SIZE = 75
 
@@ -47,14 +46,16 @@ while running:
     keys = pygame.key.get_pressed() 
 
     if keys[pygame.K_UP]:
-        player.move("UP")
+        player.set_direction("UP")
+        
     if keys[pygame.K_DOWN]:
-        player.move("DOWN")
+        player.set_direction("DOWN")
     if keys[pygame.K_LEFT]:
-        player.move("LEFT")
+        player.set_direction("LEFT")
     if keys[pygame.K_RIGHT]:
-        player.move("RIGHT")
+        player.set_direction("RIGHT")
 
+    player.move();
     screen.fill("purple")
     
     # rendering works here
@@ -63,7 +64,8 @@ while running:
     for obj in objects:
         obj.draw(screen)
             
-
+    
+    print(player)
     #simple collision detection
     pygame.display.flip()
 
