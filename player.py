@@ -2,7 +2,7 @@ import pygame
 GRID_SIZE = 75
 
 class Player:
-    def __init__(self, speed,grid, dim=(25,25), pos = (1,1) ):
+    def __init__(self, speed,grid, dim=(25,25), pos = (1,1), color=(20,100,125) ):
         # not sure of what attributes to even give this
         self.speed = speed 
         
@@ -14,7 +14,7 @@ class Player:
         
         self.targetPos = self.actualPos # for initialisation
 
-        self.color = (20,100,125) # RGB format
+        self.color = color # RGB format
 
         # this is the rect for movement smoothing
         self.rect = pygame.Rect(self.actualPos, self.dim) # Pygame rect
