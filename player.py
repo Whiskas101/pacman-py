@@ -2,11 +2,13 @@ import pygame
 GRID_SIZE = 75
 
 class Player:
-    def __init__(self, speed, dim=(25,25), pos = (1,1)):
+    def __init__(self, speed,grid, dim=(25,25), pos = (1,1) ):
         # not sure of what attributes to even give this
         self.speed = speed 
-        self.dim = dim # height and width 
-        self.pos = pos # starting position, this is in terms of the Grid Indices
+        
+        self.dim = dim # height and width of the player
+
+        self.pos = pos # starting position, this is in terms of the Grid Indices, not pixel values
 
         self.actualPos = (pos[0]*dim[0], pos[0]*dim[0]) # in terms of actual pixel values
         
@@ -20,22 +22,25 @@ class Player:
        
         # To keep track of when the player is actually in the
         # state of moving to next grid, but not quite there yet
-        #
         self.isMoving = False;
+        
+        # To know which moves are illegal.
+        self.grid = grid
+        
         print(f"Created Player: {self.dim, self.pos}") 
 
 
     def set_direction(self, direction):
         match direction.upper():
             case "UP":
-                self.direction = (0,-1)
+                self.direction = ( 0,-1 )
             case "DOWN":
-                self.direction = (0, 1)
+                self.direction = ( 0, 1 )
 
             case "LEFT":
-                self.direction = (-1, 0)
+                self.direction = (-1, 0 )
             case "RIGHT":
-                self.direction = (1, 0)
+                self.direction = ( 1, 0 )
 
     
     def draw(self, screen):
@@ -46,8 +51,21 @@ class Player:
         if self.isMoving == False:
             if self.direction == (0,0): # for the initial condition, theres def a better approach to handling the default
                 return
+
+            # THIS IS WHERE I'M PREVENTING THE PLAYER FROM MOVING INTO A WALL!
+            # check if the current pos + direction == wall
+            upcomingX = self.pos[0] + self.direction[0]
+            upcomingY = self.pos[1] + self.direction[1]
+            
+            if self.grid[upcomingX][upcomingY] == 1:
+                self.direction = (0,0)
+                return
+
+
             self.targetPos = (self.rect.x + (GRID_SIZE * self.direction[0]), self.rect.y + (GRID_SIZE * self.direction[1]))
             self.isMoving = True
+            
+            # go to next frame.
             return
         else:
             #if the player is moving, handle the offset and stop/update condition
@@ -59,6 +77,7 @@ class Player:
             distance = ((deltaX**2 + deltaY**2))**0.5
             moveDistance = min(distance, self.speed)
             print("Distance, moveDistance", distance, moveDistance)
+           
             xMove = deltaX / distance * moveDistance
             yMove = deltaY / distance * moveDistance
             
@@ -67,6 +86,8 @@ class Player:
             if distance <= self.speed:
                 self.rect.topleft = self.targetPos
                 self.pos = (self.targetPos[0] // GRID_SIZE, self.targetPos[1]//GRID_SIZE)
+
+                
                 
                 self.isMoving = False
                 return
@@ -85,6 +106,7 @@ class Player:
         # Clears the console and prints some debug information
         print("\033[2J\033[H", end="")
         return f"""
+
         -------------------------------------
             Grid Size: {GRID_SIZE},
             Direction : {self.direction},
