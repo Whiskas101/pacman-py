@@ -1,5 +1,5 @@
 import pygame
-GRID_SIZE = 75
+GRID_SIZE = 50 
 
 class Player:
     def __init__(self, speed,grid, dim=(25,25), pos = (1,1), color=(20,100,125) ):
@@ -10,7 +10,7 @@ class Player:
 
         self.pos = pos # starting position, this is in terms of the Grid Indices, not pixel values
 
-        self.actualPos = (pos[0]*dim[0], pos[0]*dim[0]) # in terms of actual pixel values
+        self.actualPos = (pos[0]*dim[0], pos[1]*dim[0]) # in terms of actual pixel values
         
         self.targetPos = self.actualPos # for initialisation
 
@@ -54,8 +54,13 @@ class Player:
 
             # THIS IS WHERE I'M PREVENTING THE PLAYER FROM MOVING INTO A WALL!
             # check if the current pos + direction == wall
-            upcomingX = self.pos[0] + self.direction[0]
-            upcomingY = self.pos[1] + self.direction[1]
+
+            # In terms of the grid, first value, refers to the Y axis,
+            # second value for the X axis, this is opposite to the convention followed
+            # in pygame (which is absurd in it's own right)
+
+            upcomingY = self.pos[0] + self.direction[0]
+            upcomingX = self.pos[1] + self.direction[1]
             
             if self.grid[upcomingX][upcomingY] == 1:
                 self.direction = (0,0)
@@ -68,6 +73,7 @@ class Player:
             # go to next frame.
             return
         else:
+
             #if the player is moving, handle the offset and stop/update condition
             # Applying linear interpolation for the smooth movement.
             

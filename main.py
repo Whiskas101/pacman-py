@@ -14,31 +14,30 @@ running = True
 
 
 
-collision = None
 objects = []
 
-SIZE = 75
+SIZE = 50 
 
 # Could add more to give it a higher resolution, sprite based
-# graphics would be implemented by the GridObject.
+# graphics would be implemented by the GridObject and the Player class itself.
 board = [
-    [1,1,1,1,1,1,1,1],
-    [1,0,0,0,0,0,0,1],
-    [1,0,1,1,0,0,1,1],
-    [1,0,1,1,0,1,1,1],
-    [1,0,0,0,0,1,1,1],
-    [1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,0,0,1,0,1,1,0,0,1,1],
+    [1,0,1,1,0,1,1,0,1,1,0,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
 
-player = Player(grid=board, dim=(75,75), speed=5)
-dumb_ai = Player(grid=board, pos=(1,1), dim=(75, 75), speed=3, color=(100,100,200))
+player = Player(grid=board, dim=(SIZE,SIZE), speed=5)
+dumb_ai = Player(grid=board, pos=(1,1), dim=(SIZE, SIZE), speed=3, color=(100,100,200))
 
 def pick_random_move():
     moves = ["UP", "DOWN", "LEFT", "RIGHT"]
     print("moving")
     return moves[randint(0, len(moves)-1)]
 
-
+# Initialising the board.
 for i in range(len(board)):
     for j in range(len(board[0])):
         val = board[i][j]
@@ -46,7 +45,7 @@ for i in range(len(board)):
         if val == 0:
             continue
 
-        obj = GridObject(pos=(SIZE*i, SIZE*j), dim=(SIZE, SIZE))
+        obj = GridObject(pos=(SIZE*j, SIZE*i), dim=(SIZE, SIZE))
         objects.append(obj)
         
 
