@@ -29,7 +29,7 @@ board = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
 
-player = Player(grid=board, dim=(SIZE,SIZE), speed=5)
+player = Player(grid=board, dim=(SIZE,SIZE), speed=5, graphicsPath="pacman-art")
 dumb_ai = Player(grid=board, pos=(1,1), dim=(SIZE, SIZE), speed=3, color=(100,100,200))
 
 def pick_random_move():

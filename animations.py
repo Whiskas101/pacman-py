@@ -4,7 +4,7 @@ from ImageLoc import some_dict
 
 pg.init()
 
-WIDTH=500
+WIDTH=900
 HEIGHT=500
 screen=pg.display.set_mode((WIDTH, HEIGHT))
 
@@ -14,6 +14,7 @@ pg.display.set_caption('Sprite Sheet')
 ss=spriteSheets.SpriteSheet()
 
 animations=[]
+print(some_dict)
 
 for key ,value in some_dict.items(): #use loop to get the images from the folders
     temp=[]
@@ -22,6 +23,8 @@ for key ,value in some_dict.items(): #use loop to get the images from the folder
         frame=ss.get_image(some_image, 20, 20, 2, (0,0))
         temp.append(frame)
     animations.append(temp)
+
+print("Length: ",len(animations))
 
 animation_cooldown=100 #cooldown time for changing animation
 last_time=pg.time.get_ticks() #get the time when the game starts
@@ -51,7 +54,7 @@ while run:
         if event.type==pg.QUIT:
             run=False
 
-        if event.type==pg.KEYDOWN: #use the keys to chnage the direction of the frames 
+        if event.type==pg.KEYDOWN: #use the keys to change the direction of the frames 
             if event.key==pg.K_LEFT:
                 action=0
     
