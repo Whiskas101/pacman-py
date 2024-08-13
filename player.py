@@ -44,7 +44,6 @@ class Player:
         
         # To decide which animation frame to show
         self.frame_step = 0
-        self.action = 0
         self.animationSpeed = 1
 
         # To know how long the current frame has been on the screen for.
@@ -213,7 +212,6 @@ class Player:
             Location: {self.graphicsPath}
             num of unique animations: {len(self.animations)}
             animations: {self.animations}
-            action: {self.action}
             frame: {self.frame_step}
         -------------------------------------
         
