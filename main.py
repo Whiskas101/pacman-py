@@ -76,7 +76,7 @@ while running:
     player.move();
     dumb_ai.move();
 
-    screen.fill("purple")
+    screen.fill((0,0,0))
     
     # rendering works here
     player.draw(screen)   
