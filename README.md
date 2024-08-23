@@ -12,6 +12,6 @@ To Do:
 - [x] Grid Object Collision
 - [x] Enemy Objects, Movement
 - [x] Enemy & Player Collision
-- [ ] Score System
+- [x] Score System
 - [ ] Win Condition
       
