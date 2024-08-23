@@ -2,12 +2,11 @@ import pygame
 
 # For loading graphical data
 from spriteSheets import SpriteSheet
-from ImageLoc import some_dict
 
 GRID_SIZE = 50 
 
 class Player:
-    def __init__(self, speed,grid, dim=(25,25), pos = (1,1), color=(20,100,125), graphicsPath=None):
+    def __init__(self, speed,grid, dim=(25,25), pos = (1,1), color=(20,100,125), graphicsPath=None, dir_shape=None):
 
         # not sure of what attributes to even give this
         self.speed = speed 
@@ -33,13 +32,14 @@ class Player:
         # To know which moves are illegal.
         self.grid = grid
         
-
-        # ANIMATION STUFF
+        
+        # Animation stuff goes here.
         # Location of where the animation frames are stored.
         self.graphicsPath = graphicsPath
-        
+        self.dir_shape = dir_shape  
         self.animations = self.loadGraphics()
         self.animation_cooldown = 100
+        
 
         
         # To decide which animation frame to show
@@ -87,6 +87,9 @@ class Player:
         #action = self.direction[0] + self.direction[1] + 2
 
         print(self.direction, action) 
+        print('LOOK HERE BRUV')
+        action = min(action, len(self.animations)-1)
+        print("Action: ", action,"Anim len: " , len(self.animations))
 
         self.current_time = pygame.time.get_ticks()
         if self.current_time-self.last_time>=self.animation_cooldown:
@@ -99,7 +102,7 @@ class Player:
                self.frame_step=0
         
         #pos=self.animations[action][self.frame_step].get_rect()
-        print("Attempting", action, self.frame_step)
+        # print("Attempting", action, self.frame_step)
         screen.blit(self.animations[action][self.frame_step], self.rect.topleft) 
         
 
@@ -140,7 +143,7 @@ class Player:
 
             distance = ((deltaX**2 + deltaY**2))**0.5
             moveDistance = min(distance, self.speed)
-            print("Distance, moveDistance", distance, moveDistance)
+            # print("Distance, moveDistance", distance, moveDistance)
            
             xMove = deltaX / distance * moveDistance
             yMove = deltaY / distance * moveDistance
@@ -174,13 +177,12 @@ class Player:
 
         # Only try to load the graphics if the path was actually mentioned.      
         animations = []
-        print(some_dict)
-        for key, animationPaths in some_dict.items():   
-            print("ANim path:", animationPaths)
+        for key, animationPaths in self.dir_shape.items():   
+            # print("Anim path:", animationPaths)
             animation = []
             for image in animationPaths.values():
                 image = pygame.image.load(f"{self.graphicsPath}/{key}/{image}").convert_alpha() 
-                print(image)
+                # print(image)
                 
 
                 
@@ -189,7 +191,7 @@ class Player:
                 
                 # Collection of frames, the animation is added as an array.
             animations.append(animation)
-        
+        # print(f"\n\n----=-=-=-Length: {len(animations)}\n=-=-=-=-\n\n") 
         return animations
 
 

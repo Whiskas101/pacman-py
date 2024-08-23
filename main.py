@@ -5,11 +5,14 @@ from random import randint
 import pygame
 from player import Player
 from GridObject import GridObject
+from ImageLoc import pacman_dir, monster_dir 
+
 pygame.init()
+
+
 
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
-player_pos = pygame.Vector2(screen.get_width()/2, screen.get_height()/2)
 running = True
 
 
@@ -29,16 +32,16 @@ board = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
 
-player = Player(pos=(7,1),grid=board, dim=(SIZE,SIZE), speed=5, graphicsPath="pacman-art")
-
+# Instantiating shit
+player = Player(pos=(7,1),grid=board, dim=(SIZE,SIZE), speed=5, graphicsPath="pacman-art", dir_shape=pacman_dir)
 monsters = []
 
 #num of monsters set here
-for i in range(3):
-    monster = Player(grid=board, pos=(1,1), dim=(SIZE, SIZE), speed=3, color=(100,100,200)) 
+for i in range(4):
+    monster = Player(grid=board, pos=(1,1), dim=(SIZE, SIZE), speed=3, color=(100,100,200), graphicsPath="pacman-art", dir_shape=monster_dir) 
     monsters.append(monster)
 
-
+# Helper function to give some motion to the monsters
 def pick_random_move():
     moves = ["UP", "DOWN", "LEFT", "RIGHT"]
     print("moving")
@@ -109,7 +112,7 @@ while running:
         obj.draw(screen)
             
     # Debug information.
-    print(player)
+    # print(player)
     
     pygame.display.flip()
 

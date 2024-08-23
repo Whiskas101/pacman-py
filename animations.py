@@ -1,6 +1,6 @@
 import pygame as pg
 import spriteSheets 
-from ImageLoc import some_dict
+from ImageLoc import pacman_dir
 
 pg.init()
 
@@ -14,13 +14,13 @@ pg.display.set_caption('Sprite Sheet')
 ss=spriteSheets.SpriteSheet()
 
 animations=[]
-print(some_dict)
+print(pacman_dir)
 
-for key ,value in some_dict.items(): #use loop to get the images from the folders
+for key ,value in pacman_dir.items(): #use loop to get the images from the folders
     temp=[]
     for image in value.values():
-        some_image=pg.image.load(f"pacman-art/{key}/{image}").convert_alpha() #key and image are referenced from the dictionary
-        frame=ss.get_image(some_image, 20, 20, 2, (0,0))
+        some_image=pg.image.load(f"pacman-art/{key}/{image}").convert_alpha() #key and image are  from the dictionary
+        frame=ss.get_image(some_image, 20, 20, (0,0))
         temp.append(frame)
     animations.append(temp)
 

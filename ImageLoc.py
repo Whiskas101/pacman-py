@@ -1,5 +1,5 @@
 #a way to access the images from the folder 
-some_dict={
+pacman_dir={
     "pacman-left":
     {
         1: "1.png",
@@ -26,5 +26,9 @@ some_dict={
     }
 }
 
+monster_dir={
 
-
+    "ghosts":{
+        1:"blinky.png"
+    },
+}
