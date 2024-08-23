@@ -29,8 +29,15 @@ board = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
 
-player = Player(grid=board, dim=(SIZE,SIZE), speed=5, graphicsPath="pacman-art")
-dumb_ai = Player(grid=board, pos=(1,1), dim=(SIZE, SIZE), speed=3, color=(100,100,200))
+player = Player(pos=(7,1),grid=board, dim=(SIZE,SIZE), speed=5, graphicsPath="pacman-art")
+
+monsters = []
+
+#num of monsters set here
+for i in range(3):
+    monster = Player(grid=board, pos=(1,1), dim=(SIZE, SIZE), speed=3, color=(100,100,200)) 
+    monsters.append(monster)
+
 
 def pick_random_move():
     moves = ["UP", "DOWN", "LEFT", "RIGHT"]
@@ -70,18 +77,34 @@ while running:
         player.set_direction("RIGHT")
     
 
-    random_direction = pick_random_move()
-    dumb_ai.set_direction(random_direction)
+    for dumb_ai in monsters:
+        random_direction = pick_random_move()
+        dumb_ai.set_direction(random_direction)
+        dumb_ai.move()
 
     player.move();
-    dumb_ai.move();
 
     screen.fill((0,0,0))
     
     # rendering works here
     player.draw(screen)   
-    dumb_ai.draw(screen)
-    
+    for dumb_ai in monsters:
+        dumb_ai.draw(screen)
+
+
+
+    #detecting collisions and ending game
+    # Method returns the indexes of all items that collided with the player
+    indices = player.collidelistall(monsters)
+
+    #simple: end the game the instant theres any collisions
+    if len(indices) > 0:
+        running = False # Simple end rule
+
+
+ 
+
+    #for drawing the map 
     for obj in objects:
         obj.draw(screen)
             
@@ -91,6 +114,9 @@ while running:
     pygame.display.flip()
 
     clock.tick(60)
+
+
+
 
 pygame.quit()
 

@@ -11,7 +11,7 @@ To Do:
 - [x] Implement Player Movement (Grid Based)
 - [x] Grid Object Collision
 - [x] Enemy Objects, Movement
-- [ ] Enemy & Player Collision
+- [x] Enemy & Player Collision
 - [ ] Score System
 - [ ] Win Condition
       

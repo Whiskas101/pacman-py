@@ -16,7 +16,7 @@ class Player:
 
         self.pos = pos # starting position, this is in terms of the Grid Indices, not pixel values
 
-        self.actualPos = (pos[0]*dim[0], pos[1]*dim[0]) # in terms of actual pixel values
+        self.actualPos = (pos[0]*dim[0], pos[1]*dim[1]) # in terms of actual pixel values
         
         self.targetPos = self.actualPos # for initialisation
 
@@ -171,7 +171,6 @@ class Player:
         if self.graphicsPath == None:
             return []
 
-        print("hi hi i hi")
 
         # Only try to load the graphics if the path was actually mentioned.      
         animations = []

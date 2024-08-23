@@ -19,7 +19,7 @@ print(some_dict)
 for key ,value in some_dict.items(): #use loop to get the images from the folders
     temp=[]
     for image in value.values():
-        some_image=pg.image.load(f"pacman-art/{key}/{image}").convert_alpha() #key and image are refreneced from the dictionary
+        some_image=pg.image.load(f"pacman-art/{key}/{image}").convert_alpha() #key and image are referenced from the dictionary
         frame=ss.get_image(some_image, 20, 20, 2, (0,0))
         temp.append(frame)
     animations.append(temp)
