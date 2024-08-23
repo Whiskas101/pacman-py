@@ -14,12 +14,13 @@ pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
-
+font = pygame.font.SysFont('Arial', 36)
 
 
 objects = []
 
 SIZE = 50 
+SCORE = 0
 
 # Could add more to give it a higher resolution, sprite based
 # graphics would be implemented by the GridObject and the Player class itself.
@@ -31,6 +32,7 @@ board = [
     [1,0,0,0,0,0,0,0,0,0,0,1,1,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
+
 
 # Instantiating shit
 player = Player(pos=(7,1),grid=board, dim=(SIZE,SIZE), speed=5, graphicsPath="pacman-art", dir_shape=pacman_dir)
@@ -44,18 +46,21 @@ for i in range(4):
 # Helper function to give some motion to the monsters
 def pick_random_move():
     moves = ["UP", "DOWN", "LEFT", "RIGHT"]
-    print("moving")
     return moves[randint(0, len(moves)-1)]
 
 # Initialising the board.
 for i in range(len(board)):
     for j in range(len(board[0])):
         val = board[i][j]
-
+        
+        # Create a variable, decide what type it is later, based on the board
+        obj = None
+        # Put a consumable object where theres no wall.
         if val == 0:
-            continue
-
-        obj = GridObject(pos=(SIZE*j, SIZE*i), dim=(SIZE, SIZE))
+            obj = GridObject(pos=(j, i), dim=(SIZE, SIZE), color=(255,100,100), board=board) 
+ 
+        else:
+            obj = GridObject(pos=(j, i), dim=(SIZE, SIZE), board=board)
         objects.append(obj)
         
 
@@ -106,11 +111,25 @@ while running:
 
 
  
+    #check if the player is currently on a 'consumable item'
+    playerX, playerY = player.pos
+
+    # print(player.pos)
+    if board[playerY][playerX] == 0:
+        # 0 indicates a consumable here
+        SCORE += 1 
+        # set current board value to -1, to indicate that it has been consumed
+        board[playerY][playerX] = -1
+        
+    text_surface = font.render(f"{SCORE}", True, (255,200,100))
+    screen.blit(text_surface, (1000,600))
 
     #for drawing the map 
     for obj in objects:
         obj.draw(screen)
-            
+    
+
+
     # Debug information.
     print(player)
     
