@@ -86,10 +86,7 @@ class Player:
         action = Map.get(self.direction)
         #action = self.direction[0] + self.direction[1] + 2
 
-        print(self.direction, action) 
-        print('LOOK HERE BRUV')
         action = min(action, len(self.animations)-1)
-        print("Action: ", action,"Anim len: " , len(self.animations))
 
         self.current_time = pygame.time.get_ticks()
         if self.current_time-self.last_time>=self.animation_cooldown:

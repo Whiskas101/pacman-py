@@ -112,7 +112,7 @@ while running:
         obj.draw(screen)
             
     # Debug information.
-    # print(player)
+    print(player)
     
     pygame.display.flip()
 
