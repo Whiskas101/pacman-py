@@ -58,10 +58,10 @@ for i in range(len(board)):
         obj = None
         # Put a consumable object where theres no wall.
         if val == 0:
-            obj = GridObject(pos=(j, i), dim=(SIZE, SIZE), color=(255,100,100), board=board) 
+            obj = GridObject(pos=(j, i), size=SIZE, color=(255,100,100), board=board) 
  
         else:
-            obj = GridObject(pos=(j, i), dim=(SIZE, SIZE), board=board)
+            obj = GridObject(pos=(j, i), size=SIZE, board=board)
         objects.append(obj)
         
 

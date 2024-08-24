@@ -2,12 +2,12 @@ import pygame
 
 class GridObject:
     
-    def __init__(self,pos, dim=(10,10), color=(0,0,255), board=None):
+    def __init__(self,pos, size, color=(0,0,255), board=None):
         self.pos = pos
-        self.dim = dim
+        self.dim = (size, size) 
         self.actualPos = (self.dim[0]*pos[0],self.dim[1]*pos[1]) 
         self.color = color
-        self.rect = pygame.Rect(self.actualPos, dim)
+        self.rect = pygame.Rect(self.actualPos, self.dim)
 
         self.board = board 
         
