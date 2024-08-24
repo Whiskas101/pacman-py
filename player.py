@@ -86,7 +86,6 @@ class Player:
         action = Map.get(self.direction)
         #action = self.direction[0] + self.direction[1] + 2
 
-        print(self.direction, action) 
         action = min(action, len(self.animations)-1)
 
         self.current_time = pygame.time.get_ticks()
@@ -189,7 +188,6 @@ class Player:
                 
                 # Collection of frames, the animation is added as an array.
             animations.append(animation)
-        # print(f"\n\n----=-=-=-Length: {len(animations)}\n=-=-=-=-\n\n") 
         return animations
 
 

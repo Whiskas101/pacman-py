@@ -33,4 +33,4 @@ class GridObject:
                 small_box_height
             )
 
-            pygame.draw.rect(screen, self.color, small_box)
+            pygame.draw.rect(screen, (255,0,0), small_box) # Red colored box to act as consumable

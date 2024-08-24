@@ -1,4 +1,4 @@
-#Testing this code
+#esting this code
 
 
 from random import randint
@@ -19,8 +19,9 @@ font = pygame.font.SysFont('Arial', 36)
 
 objects = []
 
-SIZE = 25 
+SIZE = 55 
 SCORE = 0
+END_SCORE = 0
 
 # Could add more to give it a higher resolution, sprite based
 # graphics would be implemented by the GridObject and the Player class itself.
@@ -39,29 +40,22 @@ player = Player(pos=(7,1),grid=board, size=SIZE, speed=5, graphicsPath="pacman-a
 monsters = []
 
 #num of monsters set here
-for i in range(4):
+for i in range(1):
     monster = Player(grid=board, pos=(1,1), size=SIZE, speed=3, color=(100,100,200), graphicsPath="pacman-art", dir_shape=monster_dir) 
     monsters.append(monster)
 
 # Helper function to give some motion to the monsters
 def pick_random_move():
     moves = ["UP", "DOWN", "LEFT", "RIGHT"]
-    print("moving")
     return moves[randint(0, len(moves)-1)]
 
 # Initialising the board.
 for i in range(len(board)):
     for j in range(len(board[0])):
         val = board[i][j]
-        
-        # Create a variable, decide what type it is later, based on the board
-        obj = None
-        # Put a consumable object where theres no wall.
         if val == 0:
-            obj = GridObject(pos=(j, i), size=SIZE, color=(255,100,100), board=board) 
- 
-        else:
-            obj = GridObject(pos=(j, i), size=SIZE, board=board)
+            END_SCORE += 1
+        obj = GridObject(pos=(j, i), size=SIZE, board=board)
         objects.append(obj)
         
 
@@ -115,7 +109,11 @@ while running:
     #check if the player is currently on a 'consumable item'
     playerX, playerY = player.pos
 
-    print(player.pos)
+    
+    if SCORE == END_SCORE:
+        running = False
+        print("\n\n\nYou won.") 
+        
     if board[playerY][playerX] == 0:
         # 0 indicates a consumable here
         SCORE += 1 
