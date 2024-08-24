@@ -3,19 +3,19 @@ import pygame
 # For loading graphical data
 from spriteSheets import SpriteSheet
 
-GRID_SIZE = 50 
 
 class Player:
-    def __init__(self, speed,grid, dim=(25,25), pos = (1,1), color=(20,100,125), graphicsPath=None, dir_shape=None):
+    def __init__(self, speed,grid, size,pos = (1,1), color=(20,100,125), graphicsPath=None, dir_shape=None):
 
         # not sure of what attributes to even give this
         self.speed = speed 
         
-        self.dim = dim # height and width of the player
+        self.size = size
+        self.dim = (size, size) # height and width of the player
 
         self.pos = pos # starting position, this is in terms of the Grid Indices, not pixel values
 
-        self.actualPos = (pos[0]*dim[0], pos[1]*dim[1]) # in terms of actual pixel values
+        self.actualPos = (pos[0]*self.dim[0], pos[1]*self.dim[1]) # in terms of actual pixel values
         
         self.targetPos = self.actualPos # for initialisation
 
@@ -86,6 +86,7 @@ class Player:
         action = Map.get(self.direction)
         #action = self.direction[0] + self.direction[1] + 2
 
+        print(self.direction, action) 
         action = min(action, len(self.animations)-1)
 
         self.current_time = pygame.time.get_ticks()
@@ -125,7 +126,7 @@ class Player:
                 return
 
 
-            self.targetPos = (self.rect.x + (GRID_SIZE * self.direction[0]), self.rect.y + (GRID_SIZE * self.direction[1]))
+            self.targetPos = (self.rect.x + (self.size * self.direction[0]), self.rect.y + (self.size * self.direction[1]))
             self.isMoving = True
             
             # go to next frame.
@@ -149,7 +150,7 @@ class Player:
             # set moving to false, so a new target can be calculated
             if distance <= self.speed:
                 self.rect.topleft = self.targetPos
-                self.pos = (self.targetPos[0] // GRID_SIZE, self.targetPos[1]//GRID_SIZE)
+                self.pos = (self.targetPos[0] // self.size, self.targetPos[1]//self.size)
 
                 
                 
@@ -198,7 +199,7 @@ class Player:
         return f"""
 
         -------------------------------------
-            Grid Size: {GRID_SIZE},
+            Grid Size: {self.size},
             Direction : {self.direction},
             Raw Position: {self.rect.topleft},
             Grid Position: {self.pos},

@@ -19,7 +19,7 @@ font = pygame.font.SysFont('Arial', 36)
 
 objects = []
 
-SIZE = 50 
+SIZE = 25 
 SCORE = 0
 
 # Could add more to give it a higher resolution, sprite based
@@ -35,17 +35,18 @@ board = [
 
 
 # Instantiating shit
-player = Player(pos=(7,1),grid=board, dim=(SIZE,SIZE), speed=5, graphicsPath="pacman-art", dir_shape=pacman_dir)
+player = Player(pos=(7,1),grid=board, size=SIZE, speed=5, graphicsPath="pacman-art", dir_shape=pacman_dir)
 monsters = []
 
 #num of monsters set here
 for i in range(4):
-    monster = Player(grid=board, pos=(1,1), dim=(SIZE, SIZE), speed=3, color=(100,100,200), graphicsPath="pacman-art", dir_shape=monster_dir) 
+    monster = Player(grid=board, pos=(1,1), size=SIZE, speed=3, color=(100,100,200), graphicsPath="pacman-art", dir_shape=monster_dir) 
     monsters.append(monster)
 
 # Helper function to give some motion to the monsters
 def pick_random_move():
     moves = ["UP", "DOWN", "LEFT", "RIGHT"]
+    print("moving")
     return moves[randint(0, len(moves)-1)]
 
 # Initialising the board.
@@ -114,7 +115,7 @@ while running:
     #check if the player is currently on a 'consumable item'
     playerX, playerY = player.pos
 
-    # print(player.pos)
+    print(player.pos)
     if board[playerY][playerX] == 0:
         # 0 indicates a consumable here
         SCORE += 1 
@@ -131,7 +132,7 @@ while running:
 
 
     # Debug information.
-    print(player)
+    # print(player)
     
     pygame.display.flip()
 
