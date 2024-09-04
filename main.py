@@ -19,7 +19,7 @@ font = pygame.font.SysFont('Arial', 36)
 
 objects = []
 
-SIZE = 55 
+SIZE = 25 
 SCORE = 0
 END_SCORE = 0
 
@@ -31,17 +31,29 @@ board = [
     [1,0,1,1,0,0,1,0,1,1,0,0,1,1],
     [1,0,1,1,0,1,1,0,1,1,0,1,1,1],
     [1,0,0,0,0,0,0,0,0,0,0,1,1,1],
+    [1,1,1,0,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,0,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,0,0,1,0,1,1,0,0,1,1],
+    [1,0,1,1,0,1,1,0,1,1,0,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,1,1,1],
+    [1,0,0,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,0,0,1,0,1,1,0,0,1,1],
+    [1,0,1,1,0,1,1,0,1,1,0,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,1,1,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
 
 
 # Instantiating shit
-player = Player(pos=(7,1),grid=board, size=SIZE, speed=5, graphicsPath="pacman-art", dir_shape=pacman_dir)
+player = Player(pos=(7,1),grid=board, size=SIZE, speed=3, graphicsPath="pacman-art", dir_shape=pacman_dir)
 monsters = []
 
 #num of monsters set here
 for i in range(1):
-    monster = Player(grid=board, pos=(1,1), size=SIZE, speed=3, color=(100,100,200), graphicsPath="pacman-art", dir_shape=monster_dir) 
+    monster = Player(grid=board, pos=(1,1), size=SIZE, speed=5, color=(100,100,200), graphicsPath="pacman-art", dir_shape=monster_dir) 
     monsters.append(monster)
 
 # Helper function to give some motion to the monsters
@@ -103,7 +115,7 @@ while running:
     #simple: end the game the instant theres any collisions
     if len(indices) > 0:
         running = False # Simple end rule
-
+        print("\n\n\nYou Lost.")
 
  
     #check if the player is currently on a 'consumable item'

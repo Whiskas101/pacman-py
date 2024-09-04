@@ -5,7 +5,7 @@ from spriteSheets import SpriteSheet
 
 
 class Player:
-    def __init__(self, speed,grid, size,pos = (1,1), color=(20,100,125), graphicsPath=None, dir_shape=None):
+    def __init__(self, speed, grid, size, pos = (1,1), color=(20,100,125), graphicsPath=None, dir_shape=None):
 
         # not sure of what attributes to even give this
         self.speed = speed 
@@ -119,7 +119,8 @@ class Player:
 
             upcomingY = self.pos[0] + self.direction[0]
             upcomingX = self.pos[1] + self.direction[1]
-            
+             
+            # Preventing a player from going into a wall
             if self.grid[upcomingX][upcomingY] == 1:
                 self.direction = (0,0)
                 return
@@ -152,7 +153,6 @@ class Player:
                 self.pos = (self.targetPos[0] // self.size, self.targetPos[1]//self.size)
 
                 
-                
                 self.isMoving = False
                 return
             
@@ -163,8 +163,8 @@ class Player:
     # this method wont be needed in terms of collisions with the walls,
     # only for possibly detecting when the player gets a point? or gets killed?
     
-    def collidelistall(self, *args, **kwargs):
-        return self.rect.collidelistall(*args, **kwargs)
+    def collidelistall(self, boxes):
+        return self.rect.collidelistall(boxes)
    
 
     def loadGraphics(self):
@@ -180,8 +180,6 @@ class Player:
             for image in animationPaths.values():
                 image = pygame.image.load(f"{self.graphicsPath}/{key}/{image}").convert_alpha() 
                 # print(image)
-                
-
                 
                 frame = SpriteSheet().get_image(image, self.dim[0], self.dim[1], (0,0))
                 animation.append(frame)

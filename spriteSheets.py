@@ -18,5 +18,6 @@ class SpriteSheet:
         image.fill((0,0,0,0))
         image.blit(self.image, (offsetX,offsetY)) #blit out image on the image screen
         #image.set_colorkey((255,255,255)) #change the background of the image 
+
         return image 
     
