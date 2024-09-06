@@ -208,6 +208,7 @@ class Player:
             num of unique animations: {len(self.animations)}
             animations: {self.animations}
             frame: {self.frame_step}
+            
         -------------------------------------
         
         """

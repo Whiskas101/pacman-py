@@ -1,4 +1,4 @@
-#esting this code
+#testing this code
 
 
 from random import randint
@@ -6,12 +6,13 @@ import pygame
 from player import Player
 from GridObject import GridObject
 from ImageLoc import pacman_dir, monster_dir 
+from introPage import StartEndScreen
 
 pygame.init()
 
 
-
-screen = pygame.display.set_mode((1280, 720))
+WIDTH, HEIGHT= 500, 500
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 running = True
 font = pygame.font.SysFont('Arial', 36)
@@ -52,7 +53,7 @@ player = Player(pos=(7,1),grid=board, size=SIZE, speed=3, graphicsPath="pacman-a
 monsters = []
 
 #num of monsters set here
-for i in range(1):
+for i in range(2):
     monster = Player(grid=board, pos=(1,1), size=SIZE, speed=5, color=(100,100,200), graphicsPath="pacman-art", dir_shape=monster_dir) 
     monsters.append(monster)
 
@@ -69,7 +70,11 @@ for i in range(len(board)):
             END_SCORE += 1
         obj = GridObject(pos=(j, i), size=SIZE, board=board)
         objects.append(obj)
-        
+    
+
+
+StartEndScreen(screen, "Press Space To Start", font, (255,255,10)).wait()
+
 
 while running:
     # Might cause the program to become a ghost process without this,
@@ -139,11 +144,13 @@ while running:
     for obj in objects:
         obj.draw(screen)
     
-
-
+    
     # Debug information.
     # print(player)
-    
+    print("\n")
+    for row in board:
+        print(row)
+
     pygame.display.flip()
 
     clock.tick(60)
