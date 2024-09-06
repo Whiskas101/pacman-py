@@ -138,7 +138,7 @@ while running:
         board[playerY][playerX] = -1
         
     text_surface = font.render(f"{SCORE}", True, (255,200,100))
-    screen.blit(text_surface, (1000,600))
+    screen.blit(text_surface, (450,450))
 
     #for drawing the map 
     for obj in objects:
@@ -147,9 +147,6 @@ while running:
     
     # Debug information.
     # print(player)
-    print("\n")
-    for row in board:
-        print(row)
 
     pygame.display.flip()
 
