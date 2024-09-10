@@ -21,16 +21,4 @@ class GridObject:
         elif self.board[y][x] == 0:
 
             #Scale factor, so the tiny consumable is relative to the size of the grid cell.
-            scale = 0.1
-            small_box_width = self.rect.width*scale
-            small_box_height = self.rect.height*scale
-
-            # Draw small tiny box 
-            small_box = pygame.Rect(
-                self.rect.x + (self.rect.width - small_box_width)//2,
-                self.rect.y + (self.rect.height - small_box_height)//2,
-                small_box_width,
-                small_box_height
-            )
-
-            pygame.draw.rect(screen, (255,0,0), small_box) # Red colored box to act as consumable
+            pygame.draw.circle(screen, (255, 0 , 0), (self.actualPos[0]+self.size//2, self.actualPos[1]+self.size//2 ), 3) # Red colored box to act as consumable
