@@ -8,7 +8,7 @@ class GridObject:
         self.actualPos = (self.dim[0]*pos[0],self.dim[1]*pos[1]) 
         self.color = color
         self.rect = pygame.Rect(self.actualPos, self.dim)
-
+        self.size = size
         self.board = board 
         
     
